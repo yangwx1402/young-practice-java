@@ -8,6 +8,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Service;
 
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.List;
 
 /**
@@ -22,12 +23,15 @@ public class AccountOperationImpl implements AccountOperation {
     public Long insert(String username, Integer age) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(connection -> {
-            PreparedStatement preparedStatement = connection.prepareStatement("insert account(username,age) values(?,?)");
+            /**
+             * 如果需要返回生成的主键，那么需要设置Statement.RETURN_GENERATED_KEYS
+             */
+            PreparedStatement preparedStatement = connection.prepareStatement("insert account(username,age) values(?,?)", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, username);
             preparedStatement.setInt(2, age);
             return preparedStatement;
         }, keyHolder);
-        return keyHolder.getKey().longValue();
+        return (Long) keyHolder.getKeys().get("id");
     }
 
     @Override
