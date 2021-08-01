@@ -31,6 +31,7 @@
         <jdk-version>1.8</jdk-version>
         <junit-version>4.8.1</junit-version>
         <spring-boot-version>1.5.2.RELEASE</spring-boot-version>
+        <mysql-version>8.0.19</mysql-version>
     </properties>
 
     <dependencyManagement>
@@ -65,6 +66,11 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-jdbc</artifactId>
                 <version>${spring-boot-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
