@@ -10,7 +10,7 @@ public class WaitAndNotifyExample {
 
     private static final List<Integer> tokenList = new ArrayList<>(10);
 
-    public static class Procuder implements Runnable{
+    public static class Producer implements Runnable{
 
         @Override
         public void run() {
@@ -47,7 +47,7 @@ public class WaitAndNotifyExample {
     }
 
     public static void main(String[] args) {
-        new Thread(new Procuder()).start();
+        new Thread(new Producer()).start();
         new Thread(new Consumer()).start();
     }
 }
